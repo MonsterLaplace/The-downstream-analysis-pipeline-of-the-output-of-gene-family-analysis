@@ -1,10 +1,11 @@
-# **The-downstream-analysis-pipeline-of-the-output-of-gene-family-analysis
-**
+## **The-downstream-analysis-pipeline-of-the-output-of-gene-family-analysis**
+
 ##**First install seqkit**
 
 mamba install -c bioconda seqkit
 
 ##**Expansion gene family analysis** **扩张基因家族基因提取**
+
 # 提取Gamma_change.tab第7列代表物种PRP的收缩的orthogroupsID
 cat Gamma_change.tab | awk '{if($6>0) print $0}' | cut -f1,6 | awk '{print $1"\t"$2}' >> TAntelope.expanded
 # 根据sample ID和编号提取sample分支的基因家族显著扩张或收缩的基因家族树（Gamma_asr.tre文件中默认以p<0.05为标准判断变化是否显著）
@@ -23,6 +24,7 @@ grep -f TAntelope.expanded.significant Orthogroups.txt | sed "s/ /\n/g"|grep "TA
 seqkit grep -f TAntelope.expanded.significant.genes /mnt/z/xb/orthofinder/TAntelope.faa >TAntelope.expanded.significant.pep.fa
 
 ##**Contraction gene family analysis****收缩基因家族基因提取**
+
 # 提取Gamma_change.tab第7列代表物种PRP的收缩的orthogroupsID
 cat Gamma_change.tab |cut -f1,8|grep "-" >TAntelope.contracted
 # 根据sample ID和编号提取sample分支的基因家族显著扩张或收缩的基因家族树（Gamma_asr.tre文件中默认以p<0.05为标准判断变化是否显著）
