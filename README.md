@@ -1,6 +1,9 @@
-# The-downstream-analysis-pipeline-of-the-output-of-gene-family-analysis
+# **The-downstream-analysis-pipeline-of-the-output-of-gene-family-analysis
+**
 ##**First install seqkit**
+
 mamba install -c bioconda seqkit
+
 ##**Expansion gene family analysis** **扩张基因家族基因提取**
 # 提取Gamma_change.tab第7列代表物种PRP的收缩的orthogroupsID
 cat Gamma_change.tab | awk '{if($6>0) print $0}' | cut -f1,6 | awk '{print $1"\t"$2}' >> TAntelope.expanded
